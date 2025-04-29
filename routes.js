@@ -49,7 +49,8 @@ module.exports = function (app, myDataBase) {
 
   // Ruta para cerrar sesión
   app.route("/logout").get((req, res, next) => {
-    req.logout((err) => {
+    req.logout(); // En Passport 0.4.1 no usa callback
+    req.session.destroy((err) => {
       if (err) {
         return next(err);
       }
